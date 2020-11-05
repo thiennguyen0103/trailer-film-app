@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///E:/DoanAnroid/trailerfilm_app/lib/presentation/custom_icons.dart';
+import 'package:trailerfilm_app/presentation/custom_icons.dart';
 
 class ActionsToolbar extends StatelessWidget {
   // Full dimensions of an action
@@ -73,16 +73,4 @@ class ActionsToolbar extends StatelessWidget {
           ),
           child: Icon(Icons.add, color: Colors.white, size: 20.0, )),);
   }
-
-  LinearGradient get musicGradient => LinearGradient(
-      colors: [
-        Colors.grey[800],
-        Colors.grey[900],
-        Colors.grey[900],
-        Colors.grey[800]
-      ],
-      stops: [0.0,0.4, 0.6,1.0],
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight
-  );
 }
