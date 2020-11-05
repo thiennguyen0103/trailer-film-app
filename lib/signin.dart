@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trailerfilm_app/forgotpassword.dart';
 import 'package:trailerfilm_app/signup.dart';
 import 'package:trailerfilm_app/main_screen.dart';
+import 'package:trailerfilm_app/homephase/home_phase1.dart';
 
 class SignIn extends StatelessWidget {
   @override
@@ -96,7 +97,7 @@ class SignIn extends StatelessWidget {
                   color: Colors.blue,
                   onPressed: () {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainScreen())
+                      MaterialPageRoute(builder: (context) => HomePhase1())
                     );
                   },
                   child: Text(
