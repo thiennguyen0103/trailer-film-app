@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:trailerfilm_app/forgotpassword.dart';
 import 'package:trailerfilm_app/signup.dart';
-import 'package:trailerfilm_app/main_screen.dart';
-import 'package:trailerfilm_app/homephase/home_phase1.dart';
+import 'package:trailerfilm_app/pages/root_app.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class SignIn extends StatelessWidget {
   @override
@@ -97,7 +98,7 @@ class SignIn extends StatelessWidget {
                   color: Colors.blue,
                   onPressed: () {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePhase1())
+                      MaterialPageRoute(builder: (context) => RootApp())
                     );
                   },
                   child: Text(
@@ -126,10 +127,14 @@ class SignIn extends StatelessWidget {
                   ),
                 )
             ),
-
           ],
         ),
       ),
     );
   }
+}
+Future getData() async{
+  var url = 'hhttps://files.000webhost.com/get.php';
+  http.Response response = await http.get(url);
+  var data = jsonDecode(response.body);
 }

@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class SignUp extends StatelessWidget {
+  TextEditingController username=new TextEditingController();
+  TextEditingController email=new TextEditingController();
+  TextEditingController password=new TextEditingController();
+
+  Future<List> senddata() async {
+    final response = await http.post("https://mxh-vitalk.000webhostapp.com/Server/insertdata.php", body: {
+      "name": username.text,
+      "email": email.text,
+      "password": password.text,
+    });
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -34,6 +48,7 @@ class SignUp extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: TextField(
+                controller: username,
                 style: TextStyle(fontSize: 18, color: Colors.black),
                 decoration: InputDecoration(
                     labelText: "Username",
@@ -45,6 +60,7 @@ class SignUp extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: TextField(
+                controller: email,
                 style: TextStyle(fontSize: 18, color: Colors.black),
                 decoration: InputDecoration(
                     labelText: "Email",
@@ -59,6 +75,7 @@ class SignUp extends StatelessWidget {
                 alignment: AlignmentDirectional.centerEnd,
                 children: <Widget>[
                   TextField(
+                    controller: password,
                     obscureText: true,
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     decoration: InputDecoration(
@@ -111,7 +128,9 @@ class SignUp extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8))),
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    senddata();
+                  },
                   child: Text(
                     "SIGN UP",
                     style: TextStyle(color: Colors.white, fontSize: 16),
