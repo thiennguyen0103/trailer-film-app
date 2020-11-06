@@ -7,6 +7,7 @@ import 'package:trailerfilm_app/widgets/trailer_film_icons.dart';
 import 'package:video_player/video_player.dart';
 import 'package:trailerfilm_app/widgets/video_description.dart';
 import 'package:trailerfilm_app/widgets/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -46,14 +47,9 @@ class _HomePageState extends State<HomePage>
           return VideoPlayerItem(
             videoUrl: items[index]['videoUrl'],
             size: size,
-            name: items[index]['name'],
-            caption: items[index]['caption'],
-            songName: items[index]['songName'],
-            profileImg: items[index]['profileImg'],
             likes: items[index]['likes'],
             comments: items[index]['comments'],
             shares: items[index]['shares'],
-            albumImg: items[index]['albumImg'],
           );
         }),
       ),
@@ -143,13 +139,19 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        child: ChewieListItem(
-                          videoPlayerController: VideoPlayerController.network(
-                            "https://mxh-vitalk.000webhostapp.com/Videos/Marvel%20Studios'%20Avengers_%20Endgame%20-%20Official%20Trailer.mp4",
-                          ),
-                          looping: true,
-                        ),
-                      ),
+                      height: 240.0,
+                      padding: EdgeInsets.only(bottom: 15.0),
+                      alignment: Alignment(0.0, 1.0),
+                      child: Container(
+                          child: YoutubePlayer(
+                            controller: YoutubePlayerController(
+                                initialVideoId: YoutubePlayer.convertUrlToId(
+                                    "https://www.youtube.com/watch?v=TcMBFSGVi1c&t=7s"),
+                                flags: YoutubePlayerFlags(
+                                  autoPlay: true,
+                                )),
+                            showVideoProgressIndicator: true,
+                          ))),
                       Container(
                         child: Text(
                           "Avengers End Game",
@@ -195,16 +197,12 @@ class RightPanel extends StatelessWidget {
   final String likes;
   final String comments;
   final String shares;
-  final String profileImg;
-  final String albumImg;
   const RightPanel({
     Key key,
     @required this.size,
     this.likes,
     this.comments,
     this.shares,
-    this.profileImg,
-    this.albumImg,
   }) : super(key: key);
 
   final Size size;

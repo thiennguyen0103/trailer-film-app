@@ -7,6 +7,16 @@ class VideoDescription extends StatelessWidget {
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
+          SizedBox(height: 10.0,),
+          Container(
+            margin: EdgeInsets.only(left: 5.0),
+            child: Text('Description',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -18,7 +28,7 @@ class VideoDescription extends StatelessWidget {
           ),
           SizedBox(height: 30.0),
           Container(
-            margin: EdgeInsets.only(left: 10),
+            margin: EdgeInsets.only(left: 5.0),
             child: Text(
               "Cast",
               style: TextStyle(
