@@ -17,7 +17,6 @@ class _RootAppState extends State<RootApp> {
     return Scaffold(
       appBar: appbar,
       drawer: Drawer(
-
         child: ListView(
           padding: EdgeInsets.only(top: appbar.preferredSize.height),
           children: <Widget>[
@@ -40,6 +39,7 @@ class _RootAppState extends State<RootApp> {
       bottomNavigationBar: getFooter(),
     );
   }
+
   Widget getBody(){
     return IndexedStack(
       index: pageIndex,

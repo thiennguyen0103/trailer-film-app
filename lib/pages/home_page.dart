@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:trailerfilm_app/constant/data_json.dart';
 import 'package:trailerfilm_app/theme/colors.dart';
-import 'package:trailerfilm_app/widgets/column_social_icon.dart';
-import 'package:trailerfilm_app/widgets/left_panel.dart';
-import 'package:trailerfilm_app/widgets/trailer_film_icons.dart';
-import 'package:video_player/video_player.dart';
 import 'package:trailerfilm_app/widgets/video_description.dart';
-import 'package:trailerfilm_app/widgets/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:trailerfilm_app/widgets/right_panel.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -46,6 +42,7 @@ class _HomePageState extends State<HomePage>
         children: List.generate(items.length, (index) {
           return VideoPlayerItem(
             videoUrl: items[index]['videoUrl'],
+            filmName: items[index]['filmName'],
             size: size,
             likes: items[index]['likes'],
             comments: items[index]['comments'],
@@ -59,25 +56,18 @@ class _HomePageState extends State<HomePage>
 
 class VideoPlayerItem extends StatefulWidget {
   final String videoUrl;
-  final String name;
-  final String caption;
-  final String songName;
-  final String profileImg;
+  final String filmName;
   final String likes;
   final String comments;
   final String shares;
-  final String albumImg;
+
   VideoPlayerItem(
       {Key key,
         @required this.size,
-        this.name,
-        this.caption,
-        this.songName,
-        this.profileImg,
+        this.filmName,
         this.likes,
         this.comments,
         this.shares,
-        this.albumImg,
         this.videoUrl})
       : super(key: key);
 
@@ -88,45 +78,9 @@ class VideoPlayerItem extends StatefulWidget {
 }
 
 class _VideoPlayerItemState extends State<VideoPlayerItem> {
-  VideoPlayerController _videoController;
-  bool isShowPlaying = false;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    _videoController = VideoPlayerController.asset(widget.videoUrl)
-      ..initialize().then((value) {
-        _videoController.play();
-        setState(() {
-          isShowPlaying = false;
-        });
-      });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _videoController.dispose();
-
-
-  }
-  Widget isPlaying(){
-    return _videoController.value.isPlaying && !isShowPlaying  ? Container() : Icon(Icons.play_arrow,size: 80,color: white.withOpacity(0.5),);
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          _videoController.value.isPlaying
-              ? _videoController.pause()
-              : _videoController.play();
-        });
-      },
       child: RotatedBox(
         quarterTurns: -1,
         child: Container(
@@ -145,16 +99,14 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                       child: Container(
                           child: YoutubePlayer(
                             controller: YoutubePlayerController(
-                                initialVideoId: YoutubePlayer.convertUrlToId(
-                                    "https://www.youtube.com/watch?v=TcMBFSGVi1c&t=7s"),
+                                initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl),
                                 flags: YoutubePlayerFlags(
                                   autoPlay: true,
                                 )),
                             showVideoProgressIndicator: true,
                           ))),
                       Container(
-                        child: Text(
-                          "Avengers End Game",
+                        child: Text(widget.filmName,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 19,
@@ -185,49 +137,8 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                       )
                   ),
                 ),
-
               ],
             )),
-      ),
-    );
-  }
-}
-
-class RightPanel extends StatelessWidget {
-  final String likes;
-  final String comments;
-  final String shares;
-  const RightPanel({
-    Key key,
-    @required this.size,
-    this.likes,
-    this.comments,
-    this.shares,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        height: size.height,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: size.height * 0.1,
-            ),
-            Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    getIcons(TrailerFilmIcons.heart, likes, 35.0),
-                    getIcons(TrailerFilmIcons.chat_bubble, comments, 35.0),
-                    getIcons(TrailerFilmIcons.reply, shares, 25.0),
-                  ],
-                ))
-          ],
-        ),
       ),
     );
   }
