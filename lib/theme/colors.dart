@@ -5,3 +5,7 @@ const primary = Color(0xFFFC2D55);
 const secondary =  Color(0xFF19D5F1);
 const white =  Color(0xFFFFFFFF);
 const black =  Color(0xFF000000);
+final Color backgroundColor1 = Color(0xFF4aa0d5);
+final Color backgroundColor2 = Color(0xFF4aa0d5);
+final Color highlightColor = Color(0xfff65aa3);
+final Color foregroundColor = Colors.white;

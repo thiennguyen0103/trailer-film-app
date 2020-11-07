@@ -1,75 +1,72 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ForgotPassword extends StatelessWidget {
-  // This widget is the root of your application.
+class ForgotPassword extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-        constraints: BoxConstraints.expand(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              alignment: AlignmentDirectional.center,
-              padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
-              child: Container(
-                  width: 150,
-                  height: 150,
-                  padding: EdgeInsets.all(15),
-                  child: Image.asset('assets/image/logo-user.png')
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 50.0),
-              child: Text('Reset Password', style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
-              ),),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Text('Enter your email address below to reset password', style: TextStyle(
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-                fontSize: 15.0,
-              ),),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: TextField(
-                style: TextStyle(fontSize: 18, color: Colors.black),
-                decoration: InputDecoration(
-                    labelText: "Email",
-                    labelStyle:
-                    TextStyle(color: Colors.blueGrey,
-                        fontSize: 15)),
-              ),
-            ),
+  _ForgotPassword createState() => _ForgotPassword();
+}
 
-            SizedBox(height: 20.0),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  color: Colors.red,
-                  onPressed: () {},
-                  child: Text(
-                    "Reset Password",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
+class _ForgotPassword extends State<ForgotPassword> {
+  @override
+  
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    final logo = Hero(
+      tag: 'hero', 
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 48.0,
+        child: Image.asset('assets/image/lock.png'),
+      ),
+    );
+
+    final email = TextFormField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        hintText: 'Enter your email...',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        prefixIcon: Icon(Icons.email),
+      ),
+    );
+
+    final sendEmailButton = new RaisedButton(
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+      child: const Text('Send Mail'),
+      textColor: Colors.white,
+      color: Theme.of(context).accentColor,
+      elevation: 10.0,
+      splashColor: Colors.blueGrey,
+      onPressed: () {
+        // Perform some action
+      },
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: new Text("Forgot Password")
+      ),
+      backgroundColor: Colors.white,
+      body: Center(
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.only(left: 24.0, right: 24.0),
+          children: <Widget>[
+            logo,
+            SizedBox(height: 45.0),
+            email,
+            SizedBox(height: 10.0),
+            sendEmailButton,
+            SizedBox(height: 10.0),
+            Text("Enter your email and we will send you a link to reset your password",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15.0
               ),
-            ),
-          ],
+            )
+          ]
         ),
       ),
     );

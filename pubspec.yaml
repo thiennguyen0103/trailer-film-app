@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   video_player: ^0.10.11+2
+  font_awesome_flutter: ^8.8.1
   line_icons:
   chewie: ^0.9.7
   youtube_player_flutter:
@@ -36,7 +37,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  chewie: ^0.9.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
